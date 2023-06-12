@@ -1,6 +1,8 @@
 import csv
+import random
 import smtplib
 import ssl
+import time
 
 # The message that the email bot will send
 # "Subject" and "To" are both custom, and set the respective parts of the email
@@ -34,6 +36,7 @@ with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
     with open("test_content - Sheet1.csv") as file:
         reader = csv.reader(file)
         for email, name in reader:
+            time.sleep(random.randrange(2, 5))
             print(f"Sending an email from: {from_address} to {email}, under the name {name}")
             server.sendmail(
                 from_address,
@@ -41,6 +44,4 @@ with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
                 message.format(name=name, to_address=email),
             )
 
-# SENT STATUS:
-    # Everyone up to TJ news has recieved 1 botched email
-    # Up to CPAPPAS success
+# SENT STATUS: Up to fj@FlintJ.com, under the name The Flint Journal
